@@ -26,21 +26,16 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-
-	<!-- Bluetooth permissions (required for BLE) -->
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>carplay-audio uses Bluetooth to connect to the car audio controller over BLE GATT.</string>
+	<string>BMW Connect uses Bluetooth to connect to the car audio controller over BLE GATT.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>carplay-audio uses Bluetooth to connect to the car audio controller.</string>
-
-	<!-- Local network permission (required for WebSocket / mDNS) -->
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>carplay-audio uses the local network to connect to the Raspberry Pi via WebSocket.</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_http._tcp</string>
 	</array>
-
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>BMW Connect uses the local network to connect to the Raspberry Pi via WebSocket.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

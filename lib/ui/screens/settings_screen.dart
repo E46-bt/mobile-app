@@ -198,7 +198,7 @@ class _BleSection extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    'Auto-discover devices advertising the carplay-audio service.',
+                    'Auto-discover devices advertising the service.',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
@@ -225,7 +225,7 @@ class _BleSection extends StatelessWidget {
                       ),
                       SizedBox(width: 10),
                       Text(
-                        'Looking for carplay-audio…',
+                        'Looking for device…',                        
                         style: TextStyle(
                           color: AppColors.textSecondary,
                           fontSize: 13,
@@ -455,7 +455,7 @@ class _AboutCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'carplay-audio',
+              'BMW Connect',
               style: TextStyle(
                 color: AppColors.textPrimary,
                 fontSize: 15,
@@ -464,7 +464,7 @@ class _AboutCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             const Text(
-              'Remote controller for the carplay-audio Rust daemon.\n'
+              'Remote controller for the BMW Connect Rust daemon.\n'
               'Connects via BLE GATT or WebSocket on port 9000.\n'
               'BLE service UUID: cafecafe-…-0001',
               style: TextStyle(

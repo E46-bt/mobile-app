@@ -61,7 +61,7 @@ class _Header extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'carplay-audio',
+                'BNW Connect',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontSize: 22,
                       letterSpacing: -0.5,

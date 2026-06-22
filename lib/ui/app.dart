@@ -8,7 +8,7 @@ class CarplayApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'carplay-audio',
+      title: 'BMW Connect',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
       home: const RootScreen(),
