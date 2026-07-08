@@ -1,0 +1,14 @@
+BMW Connect is the companion app for the BMW Connect audio system — a custom DSP daemon that upgrades the factory sound setup in a BMW E46 with modern digital signal processing.
+
+Pair over Bluetooth Low Energy or connect over Wi-Fi to control your car's audio in real time:
+
+• Switch instantly between AirPlay and Bluetooth audio sources
+• Fine-tune sound with a 10-band graphic equalizer (±12 dB per band)
+• Built-in EQ presets: Flat, Bass, Treble, V-Shape, and Rock
+• Adjust volume and watch live VU meters
+• Toggle loudness compensation and a limiter to prevent clipping
+• Mute audio with a single tap
+• Monitor connection status and live daemon stats at a glance
+• Dual connectivity: BLE for quick pairing, Wi-Fi for a persistent link
+
+BMW Connect requires the companion BMW Connect daemon running on compatible hardware installed in the vehicle. It is not a standalone audio player.
