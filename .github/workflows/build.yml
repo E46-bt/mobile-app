@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release-ipa
-          path: build/ios/ipa/carplay_audio.ipa
+          path: build/ios/ipa/BMWConnect.ipa
