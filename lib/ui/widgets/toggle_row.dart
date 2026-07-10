@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -77,6 +78,7 @@ class _ToggleState extends State<_Toggle> {
   @override
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
+    final dark = Theme.of(context).brightness == Brightness.dark;
     final tint = widget.accent ?? c.accent;
     final color = widget.active ? tint : c.textSecondary;
 
@@ -91,46 +93,60 @@ class _ToggleState extends State<_Toggle> {
       child: AnimatedScale(
         scale: _pressed ? 0.95 : 1.0,
         duration: const Duration(milliseconds: 120),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
-          decoration: BoxDecoration(
-            color: widget.active ? tint.withValues(alpha: 0.14) : c.card,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            children: [
-              Icon(widget.icon, size: 20, color: color),
-              const SizedBox(height: 6),
-              Text(
-                widget.label,
-                style: TextStyle(
-                  color: color,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(18),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+              decoration: BoxDecoration(
+                color: widget.active
+                    ? tint.withValues(alpha: 0.15)
+                    : (dark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.03)),
+                border: Border.all(
+                  color: widget.active
+                      ? tint.withValues(alpha: 0.3)
+                      : (dark ? Colors.white.withValues(alpha: 0.08) : Colors.black.withValues(alpha: 0.05)),
+                  width: 0.5,
                 ),
+                borderRadius: BorderRadius.circular(18),
               ),
-              if (widget.badge != null) ...[
-                const SizedBox(height: 4),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-                  decoration: BoxDecoration(
-                    color: tint.withValues(alpha: 0.18),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Text(
-                    widget.badge!,
+              child: Column(
+                children: [
+                  Icon(widget.icon, size: 20, color: color),
+                  const SizedBox(height: 6),
+                  Text(
+                    widget.label,
                     style: TextStyle(
-                      color: tint,
-                      fontSize: 8,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 0.5,
+                      color: color,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ),
-              ],
-            ],
+                  if (widget.badge != null) ...[
+                    const SizedBox(height: 4),
+                    Container(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+                      decoration: BoxDecoration(
+                        color: tint.withValues(alpha: 0.18),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        widget.badge!,
+                        style: TextStyle(
+                          color: tint,
+                          fontSize: 8,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
           ),
         ),
       ),

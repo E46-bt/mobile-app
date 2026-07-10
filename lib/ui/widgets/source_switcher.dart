@@ -29,24 +29,27 @@ class SourceSwitcher extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(999),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+        filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
         child: Container(
-          height: 44,
-          padding: const EdgeInsets.all(3),
+          height: 48, // Slightly taller for a more premium touch
+          padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(999),
             color: dark
-                ? Colors.white.withValues(alpha: 0.07)
-                : Colors.white.withValues(alpha: 0.40),
+                ? Colors.white.withValues(alpha: 0.05)
+                : Colors.black.withValues(alpha: 0.04),
             border: Border.all(
-              color: Colors.white.withValues(alpha: dark ? 0.12 : 0.55),
-              width: 0.8,
+              color: dark
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.black.withValues(alpha: 0.05),
+              width: 0.5,
             ),
           ),
           child: Stack(
+            alignment: Alignment.center,
             children: [
               AnimatedAlign(
-                duration: const Duration(milliseconds: 260),
+                duration: const Duration(milliseconds: 300),
                 curve: Curves.easeOutCubic,
                 alignment: selectedIndex == 0
                     ? Alignment.centerLeft
@@ -58,6 +61,7 @@ class SourceSwitcher extends StatelessWidget {
                 ),
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   for (final (value, icon, label) in _segments)
                     Expanded(
@@ -85,7 +89,7 @@ class SourceSwitcher extends StatelessWidget {
   }
 }
 
-/// The sliding glass thumb: white gradient, specular top edge, soft shadow.
+/// The sliding glass thumb: subtle gradient, soft shadow for depth.
 class _GlassThumb extends StatelessWidget {
   const _GlassThumb();
 
@@ -101,23 +105,25 @@ class _GlassThumb extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: dark
               ? [
-                  Colors.white.withValues(alpha: 0.26),
-                  Colors.white.withValues(alpha: 0.12),
+                  Colors.white.withValues(alpha: 0.18),
+                  Colors.white.withValues(alpha: 0.08),
                 ]
               : [
-                  Colors.white.withValues(alpha: 0.98),
-                  Colors.white.withValues(alpha: 0.80),
+                  Colors.white.withValues(alpha: 0.95),
+                  Colors.white.withValues(alpha: 0.85),
                 ],
         ),
         border: Border.all(
-          color: Colors.white.withValues(alpha: dark ? 0.35 : 0.9),
-          width: 0.8,
+          color: dark
+              ? Colors.white.withValues(alpha: 0.2)
+              : Colors.black.withValues(alpha: 0.04),
+          width: 0.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: dark ? 0.35 : 0.12),
-            blurRadius: 10,
-            offset: const Offset(0, 3),
+            color: Colors.black.withValues(alpha: dark ? 0.25 : 0.08),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -143,10 +149,11 @@ class _SegmentLabel extends StatelessWidget {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, size: 16, color: color),
-        const SizedBox(width: 7),
+        const SizedBox(width: 8),
         AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 200),
           style: TextStyle(
