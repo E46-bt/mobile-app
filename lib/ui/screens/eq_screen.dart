@@ -137,7 +137,7 @@ class _EqBars extends StatelessWidget {
                         ),
                         for (final db in [12.0, 6.0, 0.0, -6.0, -12.0])
                           Positioned(
-                            top: ((_kMaxDb - db) / _kDbRange * barHeight) - 7,
+                            top: ((_kMaxDb - db) / _kDbRange * (barHeight - 16)) + 1.5,
                             right: 4,
                             child: Text(
                               db >= 0 ? '+${db.toInt()}' : '${db.toInt()}',
@@ -187,7 +187,7 @@ class _EqBars extends StatelessWidget {
                         color: activeIndex == i
                             ? AppColors.primary
                             : AppColors.textSecondary,
-                        fontSize: 9,
+                        fontSize: 10,
                         fontWeight: activeIndex == i
                             ? FontWeight.w700
                             : FontWeight.w400,
@@ -243,8 +243,7 @@ class _EqBandState extends State<_EqBand> {
         final delta =
             (d.localPosition.dy - _startY) / widget.barHeight * _kDbRange;
         final newGain = (_startGain - delta).clamp(_kMinDb, _kMaxDb);
-        // Snap to 0.5 dB steps
-        widget.onChanged((newGain * 2).round() / 2.0);
+        widget.onChanged(newGain);
       },
       onVerticalDragEnd: (_) => widget.onActiveChanged(false),
       child: Padding(
@@ -351,7 +350,7 @@ class _BandPainter extends CustomPainter {
         canvas,
         Offset(
           size.width / 2 - tp.width / 2,
-          gainY + (gain < 0 ? 10 : -tp.height - 4),
+          gainY + (gain < 0 ? 10 : -tp.height - 4) - 2,
         ),
       );
     }
@@ -387,8 +386,7 @@ class _PresetRow extends StatelessWidget {
   const _PresetRow({required this.onPreset});
 
   static const _presets = {
-    'Flat': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-    'Bass': [4.0, 4.0, 3.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+    'Bass': [7.0, 6.0, 4.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
     'Treble': [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 2.0, 3.0, 4.0, 4.0],
     'V-Shape': [5.0, 3.0, 1.0, -1.0, -2.0, -2.0, -1.0, 1.0, 3.0, 5.0],
     'Rock': [3.0, 2.0, -1.0, -2.0, 0.0, 1.0, 2.0, 3.0, 3.0, 2.0],
