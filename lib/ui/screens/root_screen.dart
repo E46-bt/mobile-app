@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:native_liquid_glass/native_liquid_glass.dart';
+import 'dart:io';
+import 'package:cupertino_native/cupertino_native.dart';
 import 'home_screen.dart';
 import 'eq_screen.dart';
 import 'settings_screen.dart';
@@ -39,29 +40,30 @@ class _RootScreenState extends State<RootScreen> {
           index: _index,
           children: _screens,
         ),
-        bottomNavigationBar: NativeLiquidGlassUtils.supportsLiquidGlass
+        bottomNavigationBar: Platform.isIOS
           ? SafeArea(
               minimum: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-              child: LiquidGlassTabBar(
+              child: CNTabBar(
+                height: 85,
+                iconSize: 24,
+                tint: c.accent,
+                split: false,
                 items: const [
-                  LiquidGlassTabItem(
+                  CNTabBarItem(
                     label: 'Audio',
-                    icon: NativeLiquidGlassIcon.sfSymbol('waveform'),
+                    icon: CNSymbol('waveform'),
                   ),
-                  LiquidGlassTabItem(
+                  CNTabBarItem(
                     label: 'EQ',
-                    icon: NativeLiquidGlassIcon.sfSymbol('slider.horizontal.3'),
+                    icon: CNSymbol('slider.horizontal.3'),
                   ),
-                  LiquidGlassTabItem(
+                  CNTabBarItem(
                     label: 'Settings',
-                    icon: NativeLiquidGlassIcon.sfSymbol('gearshape'),
-                    selectedIcon:
-                        NativeLiquidGlassIcon.sfSymbol('gearshape.fill'),
+                    icon: CNSymbol('gearshape'),
                   ),
                 ],
                 currentIndex: _index,
-                onTabSelected: _onSelect,
-                selectedItemColor: c.accent,
+                onTap: _onSelect,
               ),
             )
           : NavigationBar(
